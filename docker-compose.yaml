@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
   db:
-    container_name: mariadb
+    container_name: mariadbcrud
     image: mariadb
     restart: always
     environment:
