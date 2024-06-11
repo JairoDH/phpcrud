@@ -10,44 +10,46 @@ pipeline {
             stages {
                 stage('Clone') {
                     steps {
-                        git branch:'main',url:'https://github.com/JairoDH/phpcrud.git'
+                        git branch: 'main', url: 'https://github.com/JairoDH/phpcrud.git'
                     }
                 }
+            }
+        }
         stage('Build-Image') {
             agent any
             stages {
                 stage('build-image') {
-		   steps {
-                      script { 
-                           App = docker.build "$IMAGE:$BUILD_NUMBER"
-                      }
-                   }
+                    steps {
+                        script { 
+                            App = docker.build("${IMAGE}:${BUILD_NUMBER}")
+                        }
+                    }
                 }
                 stage('Up-images') {
-		   steps {
-		       script {
-			   docker.withRegistry( '', LOGIN) {
-				App.push()
-			   }
-		       }
-	           }
-	        }  
-                stage('Remove-image') {
-		   steps {
-                        sh "docker rmi $IMAGE:$BUILD_NUMBER"
-                   }
+                    steps {
+                        script {
+                            docker.withRegistry('', LOGIN) {
+                                App.push()
+                            }
+                        }
+                    }
                 }
-             }
-	}
+                stage('Remove-image') {
+                    steps {
+                        sh "docker rmi ${IMAGE}:${BUILD_NUMBER}"
+                    }
+                }
+            }
+        }
         stage('Deployment') {
-	    agent any
+            agent any
             steps {
-		script {
-                     sshagent(credentials: ['VPS_SSH']) {
-                         sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es wget https://raw.githubusercontent.com/JairoDH/phpcrud/master/docker-compose.yaml -O docker-compose.yaml"
-                         sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es docker compose up -d --force-recreate"
-                     }
-                }  
+                script {
+                    sshagent(credentials: ['VPS_SSH']) {
+                        sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es wget https://raw.githubusercontent.com/JairoDH/phpcrud/master/docker-compose.yaml -O docker-compose.yaml"
+                        sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es docker compose up -d --force-recreate"
+                    }
+                }
             }
         } 
     }
@@ -59,3 +61,4 @@ pipeline {
         }
     }
 }
+
