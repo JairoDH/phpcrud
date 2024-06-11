@@ -20,7 +20,7 @@ RUN chmod +x /usr/local/script.sh
 
 #RUN a2enmod rewrite
 
-ENV DB_HOST=mariadb
+ENV DB_HOST=mariadbcrud
 ENV DB_NAME=examen
 ENV DB_USER=admin
 ENV DB_PASSWORD=admin
