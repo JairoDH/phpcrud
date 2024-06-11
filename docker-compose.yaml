@@ -10,7 +10,7 @@ services:
       DB_PASSWORD: admin
       DB_NAME: examen
     ports:
-      - 8081:80
+      - 8089:80
     depends_on:
       - db
   db:
