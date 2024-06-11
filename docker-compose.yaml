@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    container_name: crud-app
+    container_name: crudAPP
     image: jairodh/examen:v2
     restart: always
     environment:
