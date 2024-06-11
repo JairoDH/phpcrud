@@ -10,7 +10,7 @@ pipeline {
             stages {
                 stage('Clone') {
                     steps {
-                        git branch:'master',url:'https://github.com/JairoDH/phpcrud.git'
+                        git branch:'main',url:'https://github.com/JairoDH/phpcrud.git'
                     }
                 }
         stage('Build-Image') {
