@@ -2,7 +2,7 @@ version: '3.8'
 services:
   app:
     container_name: crudAPP
-    image: jairodh/examen:16
+    image: jairodh/examen:17
     restart: always
     environment:
       DB_HOST: mariadbcrud
@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
   db:
-    container_name: mariadb
+    container_name: mariadbcrud
     image: mariadb
     restart: always
     environment:
