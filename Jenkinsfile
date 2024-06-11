@@ -46,8 +46,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['VPS_SSH']) {
-                        sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es wget https://raw.githubusercontent.com/JairoDH/phpcrud/main/docker-compose.yaml -O docker-compose.yaml"
-                        sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es docker compose up -d --force-recreate"
+                        sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es wget https://raw.githubusercontent.com/JairoDH/phpcrud/main/docker-compose.yaml -O examen/docker-compose.yaml"
+                        sh "ssh -o StrictHostKeyChecking=no jairo@fekir.touristmap.es cd examen/ && docker compose up -d --force-recreate"
                     }
                 }
             }
