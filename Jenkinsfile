@@ -1,13 +1,14 @@
 pipeline { 
     environment {
-        IMAGE = "jairodh/django"
+        IMAGE = "jairodh/examen"
         LOGIN = "DOCKER_HUB"
     }
     agent none
     stages {
         stage('Build And Test Django') {
             agent {
-                docker { image 'python:3'
+                docker { 
+		image 'python:3'
                 args '-u root:root'
                 }
             }
