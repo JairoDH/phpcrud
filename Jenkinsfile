@@ -5,26 +5,14 @@ pipeline {
     }
     agent none
     stages {
-        stage('Build And Test Django') {
-            agent {
-                docker { 
-		image 'python:3'
-                args '-u root:root'
-                }
-            }
+        stage('Build And Test CRUD') {
+            agent any
             stages {
                 stage('Clone') {
                     steps {
                         git branch:'master',url:'https://github.com/JairoDH/phpcrud.git'
                     }
                 }
-                stage('Install') {
-                    steps {
-                        sh 'pip install -r requirements.txt'
-                    }
-                }
-            }
-        }
         stage('Build-Image') {
             agent any
             stages {
